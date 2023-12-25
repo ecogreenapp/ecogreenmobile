@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "29271778973",
+    "project_id": "auth-mobile-ecogreen",
+    "storage_bucket": "auth-mobile-ecogreen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29271778973:android:42e1c4c7e8b0fca7d11674",
+        "android_client_info": {
+          "package_name": "com.example.capstone_ecogreen_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASvIrgzfNieH9Km8Kdc2hFXuIkFhk1leA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29271778973:android:7dccab1573158301d11674",
+        "android_client_info": {
+          "package_name": "com.example.mobile_ecogreen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASvIrgzfNieH9Km8Kdc2hFXuIkFhk1leA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
