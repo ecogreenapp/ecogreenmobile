@@ -1,5 +1,7 @@
 import 'package:capstone_ecogreen_mobile/pages/auth_page.dart';
 import 'package:capstone_ecogreen_mobile/pages/login/login_page.dart';
+import 'package:capstone_ecogreen_mobile/screens/getstarted.dart';
+import 'package:capstone_ecogreen_mobile/screens/introscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,7 +21,7 @@ class _IntroSplashState extends State<IntroSplash>
 
     Future.delayed(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => AuthPage(),
+        builder: (_) => GetStarted(),
       ));
     });
   }
