@@ -49,9 +49,9 @@ class _IntroSplashState extends State<IntroSplash>
         ),
         child: Center(
           child: Image.asset(
-            'lib/images/ecogreen.png', // Sesuaikan path dengan lokasi gambar Anda
-            width: 250, // Sesuaikan ukuran gambar sesuai kebutuhan
-            height: 250,
+            'lib/images/newlogo.png', // Sesuaikan path dengan lokasi gambar Anda
+            width: 300, // Sesuaikan ukuran gambar sesuai kebutuhan
+            height: 300,
           ),
         ),
       ),

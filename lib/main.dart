@@ -1,7 +1,9 @@
 import 'package:capstone_ecogreen_mobile/pages/auth_page.dart';
+import 'package:capstone_ecogreen_mobile/pages/beranda/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_ecogreen_mobile/pages/intro_splash.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
 
@@ -22,15 +24,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: TextTheme(
-          bodyText2: TextStyle(
-            fontFamily: 'Outfit', // Atur font yang diinginkan di sini
-          ),
-        ),
-        primarySwatch: Colors.orange,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: IntroSplash(),
+          colorSchemeSeed: const Color.fromRGBO(0, 185, 142, 1),
+          textTheme:
+              GoogleFonts.plusJakartaSansTextTheme(Theme.of(context).textTheme),
+          useMaterial3: true),
+      home: const HomeScreen(),
       routes: {
         '/login': (context) => const AuthPage(),
       },
