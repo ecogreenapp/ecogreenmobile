@@ -48,7 +48,7 @@ class WasteBanklist extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text("General practitioner"),
+                  const Text("Jl.Kraton Tegal"),
                   const SizedBox(height: 16),
                   Row(
                     children: [
