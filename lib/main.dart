@@ -1,6 +1,4 @@
 import 'package:capstone_ecogreen_mobile/pages/auth_page.dart';
-import 'package:capstone_ecogreen_mobile/pages/beranda/home_screen.dart';
-import 'package:capstone_ecogreen_mobile/screens/introscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_ecogreen_mobile/pages/intro_splash.dart';

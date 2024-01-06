@@ -15,20 +15,33 @@ class ChatbotScreen extends StatefulWidget {
 class _ChatbotScreenState extends State<ChatbotScreen> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
   List<String> _data = [];
-  static const String BOT_URL = "http://192.168.1.2:5000/chat";
+  static const String BOT_URL =
+      "https://a3cb-103-166-147-253.ngrok-free.app/chat";
   TextEditingController queryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        title: Text("ChatBot"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.grey[900],
+        ),
       ),
       body: Stack(
         children: <Widget>[
+          // Background Image
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'lib/images/bg.png'), // Replace with your image asset path
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           AnimatedList(
             key: _listKey,
             initialItemCount: _data.length,
@@ -49,7 +62,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.message,
-                            color: Colors.blue,
+                            color: Color.fromRGBO(0, 185, 142, 1),
                           ),
                           hintText: "Enter chat",
                           fillColor: Colors.white12),
@@ -115,7 +128,7 @@ Widget buildItem(String item, Animation<double> animation, int index) {
             item.replaceAll("<bot>", ""),
             style: TextStyle(color: mine ? Colors.white : Colors.black),
           ),
-          color: mine ? Colors.blue : Colors.grey[200],
+          color: mine ? Color.fromRGBO(0, 185, 142, 1) : Colors.grey[200],
           padding: BubbleEdges.all(10),
         ),
       ),

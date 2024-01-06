@@ -1,8 +1,9 @@
-import 'package:capstone_ecogreen_mobile/pages/fitur/splash_chatbot.dart';
 import 'package:capstone_ecogreen_mobile/pages/fitur/detect_page.dart';
+import 'package:capstone_ecogreen_mobile/pages/fitur/edupage.dart';
+import 'package:capstone_ecogreen_mobile/pages/fitur/splash_chatbot.dart';
 import 'package:flutter/material.dart';
-
-import '../pages/fitur/chatbotpage.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EcogreenMenu extends StatelessWidget {
   const EcogreenMenu({Key? key}) : super(key: key);
@@ -17,7 +18,8 @@ class EcogreenMenu extends StatelessWidget {
   // Function to handle the tap on the "Education" icon
   void _onEducationTap(BuildContext context) {
     // Implement the logic to navigate to the "Education" page
-    // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => EducationPage()));
+    Example:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EduPage()));
   }
 
   // Function to handle the tap on the "Green Bot" icon

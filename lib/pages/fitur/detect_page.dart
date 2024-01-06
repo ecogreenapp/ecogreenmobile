@@ -1,8 +1,11 @@
 import 'dart:io';
-
+import 'package:dio/dio.dart' as dio; // Import dio with an alias
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:get/get_connect/http/src/response/response.dart'
+    as getResponse; // Import get Response with an alias
 
 class DetectionPage extends StatefulWidget {
   const DetectionPage({Key? key}) : super(key: key);
@@ -15,6 +18,160 @@ class _DetectionPageState extends State<DetectionPage> {
   File? pickedImage;
   String detectionResult = '';
   bool isImageUploaded = false;
+
+  File? imageFile;
+  final imagePicker = ImagePicker();
+
+  Future<void> sendJsonToFlask() async {
+    String? Stress;
+    if (imageFile == null) {
+      print('File gambar belum dipilih.');
+      return;
+    }
+
+    String? fileName = imageFile?.path.split('/').last;
+    if (fileName == null) {
+      print('Gagal mendapatkan nama file.');
+      return;
+    }
+
+    String apiUrl = "https://a3cb-103-166-147-253.ngrok-free.app/receive_json";
+    dio.Dio dioInstance = dio.Dio(); // Use the dio alias
+
+    try {
+      // Menggunakan opsi `data` untuk mengirim data dalam format JSON
+      dio.Response response = await dioInstance.post(
+        apiUrl,
+        data: {'text': fileName}, // Kirim data teks sebagai payload JSON
+      );
+
+      // Periksa apakah respons server sukses
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseData = response.data;
+        String message = responseData['message'];
+
+        // if (message == 'sukses') {
+        //   print('Sukses menerima teks JSON dari Flask $message');
+        // } else {
+        //   print('Gagal menerima teks JSON dari Flask');
+        // }
+        // print("Setres " + message);
+        _showAlertDialog(context, 'Jenis Sampah', '$message');
+      } else {
+        print('Permintaan gagal. Kode respons: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during request: $e');
+    }
+  }
+
+  Future<void> uploadFileImage() async {
+    File imageFileUpload = File(imageFile!.path);
+    String? fileName = imageFile?.path.split('/').last;
+
+    String uploadEndpoint =
+        "https://a3cb-103-166-147-253.ngrok-free.app/uploadFileAndroid";
+    dio.Dio dioInstance = dio.Dio();
+
+    dio.FormData formData = dio.FormData.fromMap({
+      'file':
+          await dio.MultipartFile.fromFile(imageFile!.path, filename: fileName),
+    });
+
+    try {
+      dio.Response response =
+          await dioInstance.post(uploadEndpoint, data: formData);
+      if (response.data == 'sukses') {
+        print('Upload berhasil: ${response.data}');
+      } else {
+        print('${response.data}');
+      }
+    } catch (e) {
+      print('Error saat mengunggah: $e');
+    }
+  }
+
+  Future<void> predict() async {
+    uploadFileImage();
+    sendJsonToFlask();
+  }
+
+  Future<void> showPictureDialog() async {
+    await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Select Action'),
+            children: [
+              SimpleDialogOption(
+                onPressed: () {
+                  getFromCamera();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Open Camera'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  getFromGallery();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Open Gallery'),
+              ),
+            ],
+          );
+        });
+  }
+
+  void _showAlertDialog(BuildContext context, String title, String content) {
+    // Membuat AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            // Tutup alert
+            Navigator.of(context).pop();
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    // Menampilkan AlertDialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  getFromGallery() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  getFromCamera() async {
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
   void imagePickerOption() {
     Get.bottomSheet(
@@ -88,7 +245,7 @@ class _DetectionPageState extends State<DetectionPage> {
       if (photo == null) return;
       final tempImage = File(photo.path);
       setState(() {
-        pickedImage = tempImage;
+        imageFile = tempImage;
         isImageUploaded = true;
         detectionResult =
             'Deteksi sampah berhasil!\n\nSampah Botol Plastik dengan akurasi 85%\n\nMenu:\n- Harga Jual: Rp 5000/kg\n- Lokasi Bank Sampah: Jl. Bank Sampah No. 123\n- Kontak Bank Sampah: 081234567890';
@@ -157,9 +314,9 @@ class _DetectionPageState extends State<DetectionPage> {
                       ),
                     ),
                     child: ClipRRect(
-                      child: pickedImage != null
+                      child: imageFile != null
                           ? Image.file(
-                              pickedImage!,
+                              imageFile!,
                               width: 270,
                               height: 200,
                               fit: BoxFit.cover,
@@ -190,12 +347,42 @@ class _DetectionPageState extends State<DetectionPage> {
             const SizedBox(
               height: 20,
             ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ElevatedButton.icon(
+            //     onPressed: imagePickerOption,
+            //     icon: const Icon(Icons.add_a_photo_sharp),
+            //     label: const Text('UPLOAD IMAGE'),
+            //     style: ElevatedButton.styleFrom(
+            //         backgroundColor: const Color.fromRGBO(0, 185, 142, 1)),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton.icon(
-                onPressed: imagePickerOption,
+                onPressed: showPictureDialog,
                 icon: const Icon(Icons.add_a_photo_sharp),
-                label: const Text('UPLOAD IMAGE'),
+                label: const Text('CHOOSE IMAGE'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(0, 185, 142, 1)),
+              ),
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ElevatedButton.icon(
+            //     onPressed: uploadFileImage,
+            //     icon: const Icon(Icons.add_a_photo_sharp),
+            //     label: const Text('UPLOAD IMAGE'),
+            //     style: ElevatedButton.styleFrom(
+            //         backgroundColor: const Color.fromRGBO(0, 185, 142, 1)),
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton.icon(
+                onPressed: predict,
+                icon: const Icon(Icons.add_a_photo_sharp),
+                label: const Text('PREDICT'),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(0, 185, 142, 1)),
               ),
