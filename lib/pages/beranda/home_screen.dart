@@ -1,3 +1,5 @@
+import 'package:capstone_ecogreen_mobile/auth_services.dart';
+import 'package:capstone_ecogreen_mobile/core.dart';
 import 'package:capstone_ecogreen_mobile/widgets/ecogreen_menu.dart';
 import 'package:capstone_ecogreen_mobile/widgets/upcoming_card.dart';
 import 'package:capstone_ecogreen_mobile/widgets/wastebank.dart';
@@ -8,78 +10,70 @@ import 'package:ionicons/ionicons.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final user = FirebaseAuth.instance.currentUser!;
-
-  // sign user out method
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // name
-                        Text(
-                          'Hello',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // name
+                      Text(
+                        'Hello ${AuthServices.nama}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
-                        SizedBox(height: 8),
-                        // Text(
-                        //   "Hasnita Ran",
-                        //   style: TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //     fontSize: 20,
-                        //   ),
-                        // ),
-                        Text(
-                          user.email!,
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 8),
+                      // Text(
+                      //   "Hasnita Ran",
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     fontSize: 20,
+                      //   ),
+                      // ),
+                    ],
+                  ),
 
-                    // // profile picture
-                    // Container(
-                    //   padding: EdgeInsets.all(10),
-                    //   child: Icon(Icons.person),
-                    // ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          actions: [
-            IconButton(
-              onPressed: signUserOut,
-              icon: Icon(Icons.logout),
+                  // // profile picture
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   child: Icon(Icons.person),
+                  // ),
+                ],
+              ),
             )
-          ]
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Ionicons.notifications_outline),
-          //   ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Navigasi ke halaman tertentu
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      HistoryMobileView(), // Ganti dengan halaman yang diinginkan
+                ),
+              );
+            },
+            icon: const Icon(Icons.calendar_month),
+          ),
           //   IconButton(
           //     onPressed: () {},
           //     icon: const Icon(Ionicons.search_outline),
           //   ),
-          // ],
-          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(14),
         children: [
@@ -113,14 +107,41 @@ class HomeScreen extends StatelessWidget {
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.home_outline), label: "Home"),
+            icon: Icon(Ionicons.home_outline),
+            label: "Home",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.calendar_outline), label: "Calendar"),
+            icon: Icon(Ionicons.chatbubble_ellipses_outline),
+            label: "Chats",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.chatbubble_ellipses_outline), label: "Chats"),
-          BottomNavigationBarItem(
-              icon: Icon(Ionicons.person_outline), label: "Profile"),
+            icon: Icon(Ionicons.person_outline),
+            label: "Profile",
+          ),
         ],
+        onTap: (int index) {
+          // Handle navigation based on the tapped icon
+          switch (index) {
+            case 0:
+              // Navigate to Home page
+              // You can replace this with your actual Home page navigation logic
+              break;
+            case 1:
+              // Navigate to Chats page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SplashChatbot(), // Replace with your Chat page
+                ),
+              );
+              break;
+            case 2:
+              // Navigate to Profile page
+              // You can replace this with your actual Profile page navigation logic
+              break;
+          }
+        },
       ),
     );
   }

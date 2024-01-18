@@ -1,4 +1,3 @@
-import 'package:capstone_ecogreen_mobile/pages/auth_page.dart';
 import 'package:capstone_ecogreen_mobile/pages/login/login_page.dart';
 import 'package:capstone_ecogreen_mobile/screens/getstarted.dart';
 import 'package:capstone_ecogreen_mobile/screens/introscreen.dart';

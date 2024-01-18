@@ -1,5 +1,10 @@
 {
-    "modules": [],
+    "modules": [
+        "list_sampah",
+        "detail_sampah",
+        "history_mobile",
+        "login_mobile"
+    ],
     "module_directory_name": "module",
     "experimental_mode": false,
     "learning_mode": false,

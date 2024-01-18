@@ -1,6 +1,5 @@
-import 'package:capstone_ecogreen_mobile/pages/auth_page.dart';
+import 'package:capstone_ecogreen_mobile/core.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 
 class UpcomingCard extends StatelessWidget {
@@ -16,7 +15,7 @@ class UpcomingCard extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.8),
+              color: Color.fromRGBO(64, 169, 139, 0.494),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -63,13 +62,14 @@ class UpcomingCard extends StatelessWidget {
                           // Navigate to the LoginPage when "Get Started" is clicked
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AuthPage()),
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
                           );
                         },
                         child: Container(
                           padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(0, 185, 142, 0.612),
+                            color: Color.fromRGBO(2, 119, 91, 1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(

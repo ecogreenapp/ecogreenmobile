@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:capstone_ecogreen_mobile/auth_services.dart';
+import 'package:capstone_ecogreen_mobile/egreen_service.dart';
 import 'package:dio/dio.dart' as dio; // Import dio with an alias
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -35,20 +37,23 @@ class _DetectionPageState extends State<DetectionPage> {
       return;
     }
 
-    String apiUrl = "https://a3cb-103-166-147-253.ngrok-free.app/receive_json";
+    String apiUrl = "${ApiConstants.baseurl}/receive_json";
     dio.Dio dioInstance = dio.Dio(); // Use the dio alias
 
     try {
       // Menggunakan opsi `data` untuk mengirim data dalam format JSON
       dio.Response response = await dioInstance.post(
         apiUrl,
-        data: {'text': fileName}, // Kirim data teks sebagai payload JSON
+        data: {
+          'text': fileName,
+          'userid': '${AuthServices.id}'
+        }, // Kirim data teks sebagai payload JSON
       );
 
       // Periksa apakah respons server sukses
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data;
-        String message = responseData['message'];
+        String message = responseData['result'];
 
         // if (message == 'sukses') {
         //   print('Sukses menerima teks JSON dari Flask $message');
@@ -69,8 +74,7 @@ class _DetectionPageState extends State<DetectionPage> {
     File imageFileUpload = File(imageFile!.path);
     String? fileName = imageFile?.path.split('/').last;
 
-    String uploadEndpoint =
-        "https://a3cb-103-166-147-253.ngrok-free.app/uploadFileAndroid";
+    String uploadEndpoint = "${ApiConstants.baseurl}/uploadFileAndroid";
     dio.Dio dioInstance = dio.Dio();
 
     dio.FormData formData = dio.FormData.fromMap({

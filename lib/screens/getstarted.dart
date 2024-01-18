@@ -1,3 +1,4 @@
+import 'package:capstone_ecogreen_mobile/core.dart';
 import 'package:capstone_ecogreen_mobile/helper/colors.dart';
 import 'package:capstone_ecogreen_mobile/screens/introscreen.dart';
 import 'package:capstone_ecogreen_mobile/widgets/backgroundcircle.dart';
@@ -197,7 +198,7 @@ class _GetStartedState extends State<GetStarted>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const IntroScreen(),
+                          builder: (context) => const LoginMobileView(),
                         ),
                       );
                     },

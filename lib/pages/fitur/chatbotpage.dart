@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bubble/bubble.dart';
+import 'package:capstone_ecogreen_mobile/egreen_service.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,8 +16,7 @@ class ChatbotScreen extends StatefulWidget {
 class _ChatbotScreenState extends State<ChatbotScreen> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
   List<String> _data = [];
-  static const String BOT_URL =
-      "https://a3cb-103-166-147-253.ngrok-free.app/chat";
+  static String BOT_URL = "${ApiConstants.baseurl}/chat";
   TextEditingController queryController = TextEditingController();
 
   @override
