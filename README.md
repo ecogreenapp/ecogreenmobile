@@ -1,6 +1,7 @@
 # EcoGreen Mobile Apps
+A new Flutter project.
 
-A new Flutter project. Deskripsi ......
+Dalam versi mobile, proyek Ecogreen bertujuan untuk membawa solusi berkelanjutan ke dalam genggaman pengguna. Dengan fungsionalitas deteksi sampah pintar, informasi bank sampah lokal secara real-time, dan akses mudah melalui perangkat seluler, aplikasi mobile ini menjadi kawan setia untuk gaya hidup hijau. Menyediakan edukasi tentang peluang ekonomi bagi ibu rumah tangga, fitur chatbot yang ramah, dan kemudahan pengelolaan sampah, aplikasi ini tidak hanya memberikan aksesibilitas yang lebih besar tetapi juga mendorong keterlibatan aktif dalam pelestarian lingkungan. Dengan sentralitas penggunaan melalui perangkat mobile, Ecogreen Mobile menghadirkan ekosistem berkelanjutan di ujung jari pengguna, mengajak mereka untuk menjadi agen perubahan dalam perawatan lingkungan sehari-hari.
 
 ## Getting Started
 
@@ -21,9 +22,9 @@ samples, guidance on mobile development, and a full API reference.
     - Pastikan Flutter dan Dart telah terinstal di sistem Anda. Jika belum, ikuti [panduan instalasi Flutter](https://flutter.dev/docs/get-started/install) untuk proses instalasi.
 
 2. **Clone Repositori:** <br>
-    git clone https://github.com/username/nama-proyek.git
+    git clone https://github.com/ecogreenapp/ecogreenmobile.git
 
-    - Gantilah `https://github.com/username/nama-proyek.git` dengan URL repositori proyek Anda.
+    - Gantilah `https://github.com/ecogreenapp/ecogreenmobile.git` dengan URL repositori proyek Anda.
 
 3. **Pindah ke Direktori Proyek:** <br>
     cd nama-proyek
