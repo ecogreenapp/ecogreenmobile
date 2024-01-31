@@ -55,12 +55,6 @@ class _DetectionPageState extends State<DetectionPage> {
         Map<String, dynamic> responseData = response.data;
         String message = responseData['result'];
 
-        // if (message == 'sukses') {
-        //   print('Sukses menerima teks JSON dari Flask $message');
-        // } else {
-        //   print('Gagal menerima teks JSON dari Flask');
-        // }
-        // print("Setres " + message);
         _showAlertDialog(context, 'Jenis Sampah', '$message');
       } else {
         print('Permintaan gagal. Kode respons: ${response.statusCode}');
@@ -385,7 +379,7 @@ class _DetectionPageState extends State<DetectionPage> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton.icon(
                 onPressed: predict,
-                icon: const Icon(Icons.add_a_photo_sharp),
+                icon: const Icon(Icons.online_prediction_sharp),
                 label: const Text('PREDICT'),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(0, 185, 142, 1)),

@@ -1,6 +1,4 @@
-import 'package:capstone_ecogreen_mobile/pages/login/login_page.dart';
 import 'package:capstone_ecogreen_mobile/screens/getstarted.dart';
-import 'package:capstone_ecogreen_mobile/screens/introscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

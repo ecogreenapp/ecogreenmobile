@@ -1,9 +1,5 @@
 import 'package:capstone_ecogreen_mobile/auth_services.dart';
 import 'package:capstone_ecogreen_mobile/core.dart';
-import 'package:capstone_ecogreen_mobile/widgets/ecogreen_menu.dart';
-import 'package:capstone_ecogreen_mobile/widgets/upcoming_card.dart';
-import 'package:capstone_ecogreen_mobile/widgets/wastebank.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -27,28 +23,15 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       // name
                       Text(
-                        'Hello ${AuthServices.nama}',
+                        'HELLO! ${AuthServices.nama}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
                       ),
                       SizedBox(height: 8),
-                      // Text(
-                      //   "Hasnita Ran",
-                      //   style: TextStyle(
-                      //     fontWeight: FontWeight.bold,
-                      //     fontSize: 20,
-                      //   ),
-                      // ),
                     ],
                   ),
-
-                  // // profile picture
-                  // Container(
-                  //   padding: EdgeInsets.all(10),
-                  //   child: Icon(Icons.person),
-                  // ),
                 ],
               ),
             )
@@ -68,10 +51,6 @@ class HomeScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.calendar_month),
           ),
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Ionicons.search_outline),
-          //   ),
         ],
       ),
       body: ListView(

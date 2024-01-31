@@ -2,7 +2,7 @@ import 'package:capstone_ecogreen_mobile/auth_services.dart';
 import 'package:dio/dio.dart';
 
 class ApiConstants {
-  static String baseurl = "https://1483-114-79-16-147.ngrok-free.app";
+  static String baseurl = "https://bc49-103-158-253-153.ngrok-free.app";
 }
 
 class EgreenService {

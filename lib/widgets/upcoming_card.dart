@@ -93,6 +93,11 @@ class UpcomingCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Container(
+            constraints: BoxConstraints(
+              minHeight: 50.0, // Set a minimum height for the search bar
+              minWidth: double
+                  .infinity, // Set minimum width to occupy available space
+            ),
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.green[100],
